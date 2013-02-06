@@ -1,0 +1,65 @@
+@model DevNext.Web.Models.ViewModel.EventListView
+
+@{
+    ViewBag.Title = "Index";
+}
+@{ bool isCommunityLeader = (Request.IsAuthenticated && User.IsInRole("CommunityLeader")); }
+<section id="events">
+    <div class="page-header">
+        <h2>Events</h2>
+    </div>
+    @if (isCommunityLeader)
+    {
+        <div class="row">
+            <div class="offset1 span10">
+                <p><a href="@Url.Action("Create")">Create New</a></p>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="offset1 span10">
+            <div class="well">
+                <h3>Upcoming Event(s)</h3>
+                @if (Model.UpcomingEvents.Any())
+                {
+                    <ul>
+                        @foreach (DevNext.Web.Models.UserGroupEvent upcomingEvent in Model.UpcomingEvents)
+                        {
+                            <li>
+                                @Html.ActionLink(upcomingEvent.Title, "Details", "Event", new { id = upcomingEvent.Id }, null) Begins @upcomingEvent.StartDateTime at @upcomingEvent.Address [@upcomingEvent.City, @upcomingEvent.Country]
+                                @if (isCommunityLeader)
+                                {
+                                    @Html.ActionLink("Edit", "Edit", "Event", new { id = upcomingEvent.Id }, null)
+                                    @Html.ActionLink("Export Registered Users", "Edit", "Event", new { id = upcomingEvent.Id }, null)
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Currently there are no new upcoming events</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset1 span10">
+            <div class="well">
+                <h3>Past Events</h3>
+                <ul>
+                    @foreach (DevNext.Web.Models.UserGroupEvent pastEvent in Model.PastEvents)
+                    {
+                        <li>
+                            @Html.ActionLink(pastEvent.Title, "Details", "Event", new { id = pastEvent.Id }, null) started at @pastEvent.StartDateTime at @pastEvent.Address [@pastEvent.City, @pastEvent.Country]
+                            @if (isCommunityLeader)
+                            {
+                                @Html.ActionLink("Edit", "Edit", "Event", new { id = pastEvent.Id }, null)
+                            }
+                        </li> 
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

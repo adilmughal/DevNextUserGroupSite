@@ -1,0 +1,91 @@
+@model DevNext.Web.Models.UserGroupEvent
+
+@{
+    ViewBag.Title = "Details";
+}
+<section id="details_event">
+    <div class="page-header">
+        <h2>Event: @Model.Title</h2>
+    </div>
+    <div class="row">
+        <div class="span10 offset1">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (ViewBag.IsUserAlreadyRegistered)
+                {
+                <div class="alert alert-success">
+                    <span>You have already registered to attend this event. We are glad to see you coming!</span>
+                </div>
+                }
+                else
+                {
+                <div class="well-small pull-right">
+                    <input id="btnRegister"  type="button" value="Register to Attend" class="btn btn-primary" onclick="registerUserForEvent(@Model.Id);" />
+                </div>
+                <div id="messagebox" style="display: none"></div>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <span>Please login to register for event.</span>
+                </div>
+            }
+
+            <div class="well form-horizontal">
+                <fieldset>
+                    <legend>Event Details</legend>
+                    @Html.Partial("_View", Model)
+                </fieldset>
+            </div>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        function registerUserForEvent(eventId) {
+            $('#btnRegister').attr('disabled', 'disabled');
+            var url = '/Event/Register';
+            var dataPost = '{ eventId : ' + eventId.toString() + '}';
+            $.ajax({
+                url: url,
+                contentType: 'application/json; charset=utf-8',
+                data: dataPost,
+                success: onRegistrationSuccess,
+                error: onRegistrationError,
+                type: 'POST',
+                dataType: 'json',
+                cache: 'false',
+
+            });
+        }
+
+        function onRegistrationSuccess(result) {
+            $('#btnRegister').removeAttr('disabled');
+            if (result.response == true) {
+                $('#messagebox').addClass('alert').addClass('alert-success');
+                $('#messagebox').html('<strong>Success</strong> ' + result.message);
+                $('#btnRegister').hide();
+            } else {
+                $('#messagebox').addClass('alert').addClass('alert-error');
+                $('#messagebox').html('<strong>Error</strong> ' +  result.message);
+            }
+            $('#messagebox').show('fast');
+        }
+
+        function onRegistrationError(result) {
+            $('#btnRegister').removeAttr('disabled');
+            $('#messagebox').addClass('alert').addClass('alert-error');
+            $('#messagebox').html('<strong>Error</strong> ' +  result.message);
+            $('#messagebox').show('fast');
+        }
+
+    </script>
+
+}

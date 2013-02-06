@@ -1,0 +1,24 @@
+﻿@model IEnumerable<System.ServiceModel.Syndication.SyndicationItem>
+
+@{
+    ViewBag.Title = "Blog Feed";
+}
+<section id="blog_feeds_view">
+    <div class="page-header">
+        <h2>Blog Feed</h2>
+    </div>
+    <div class="row">
+        <div class="span10 offset1">
+            <div class="well">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <a target="_blank" href="@item.Links[0].Uri.ToString()">@item.Title.Text</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

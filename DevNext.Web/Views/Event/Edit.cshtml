@@ -1,0 +1,35 @@
+@model DevNext.Web.Models.UserGroupEvent
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Event</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.Partial("_CreateOrEdit", Model)
+        <div class="form-actions">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).submit(validateEventForm(this));
+        $(document).ready(onEventFormReady());
+    </script>
+}

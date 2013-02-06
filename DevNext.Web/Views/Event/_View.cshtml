@@ -1,0 +1,60 @@
+@model DevNext.Web.Models.UserGroupEvent
+
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Title)
+    </div>
+    <div class="controls">
+        @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "input-xxlarge uneditable-input" }, null, true)
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.StartDateTime)
+    </div>
+    <div class="controls">
+        @Html.Html5TextBoxFor(m => m.StartDateTime, InputTypes.InputType.Text, new { @class = "input-large uneditable-input" }, null, true)
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.EndDateTime)
+    </div>
+    <div class="controls">
+       @Html.Html5TextBoxFor(m => m.EndDateTime, InputTypes.InputType.Text, new { @class = "input-large uneditable-input" }, null, true)
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.IsVirtualEvent)
+    </div>
+    <div class="controls">
+        @Html.CheckBoxFor(m => m.IsVirtualEvent, new { @class = "checkbox" })
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Address)
+    </div>
+    <div class="controls controls-row">
+        @Html.Html5TextBoxFor(m => m.Address, InputTypes.InputType.Text, new { @class = "input-xlarge uneditable-input" }, null, true)
+        @Html.Html5TextBoxFor(m => m.City, InputTypes.InputType.Text, new { @class = "input-small uneditable-input" }, null, true)
+        @Html.Html5TextBoxFor(m => m.Country, InputTypes.InputType.Text, new { @class = "input-large uneditable-input" }, null, true)
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Url)
+    </div>
+    <div class="controls">
+        @Html.Html5TextBoxFor(m => m.Url, InputTypes.InputType.Url, new { @class = "input-xxlarge uneditable-input" }, "http://www.example.com", true)
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Description)
+    </div>
+    <div class="controls">
+        @Html.TextAreaFor(m => m.Description, 6, 1, new { @class = "input-xxlarge uneditable-input"})
+    </div>
+</div>

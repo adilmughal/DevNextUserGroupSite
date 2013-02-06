@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /Account
+Disallow: /Content
+Disallow: /Images
+Disallow: /Scripts

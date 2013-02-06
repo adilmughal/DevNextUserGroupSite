@@ -1,0 +1,163 @@
+@model DevNext.Web.Models.UserGroupEvent
+
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Title)
+    </div>
+    <div class="controls">
+        @Html.TextBoxFor(m => m.Title, new { @class = "input-xxlarge", required = "required", maxlenght = "500" })
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.StartDateTime)
+    </div>
+    <div class="controls">
+        @Html.HiddenFor(m => m.StartDateTime)
+        <input type="text" class="input-medium datepicker" value="" id="StartDate" name="StartDate" placeholder="Pick a Date" required="required" />
+        <select class="input-medium" id="StartTime" name="StartTime" required>
+            <option value="00:00:00 AM">12:00 AM</option>
+            <option value="00:30:00 AM">12:30 AM</option>
+            <option value="01:00:00 AM">1:00 AM</option>
+            <option value="01:30:00 AM">1:30 AM</option>
+            <option value="02:00:00 AM">2:00 AM</option>
+            <option value="02:30:00 AM">2:30 AM</option>
+            <option value="03:00:00 AM">3:00 AM</option>
+            <option value="03:30:00 AM">3:30 AM</option>
+            <option value="04:00:00 AM">4:00 AM</option>
+            <option value="04:30:00 AM">4:30 AM</option>
+            <option value="05:00:00 AM">5:00 AM</option>
+            <option value="05:30:00 AM">5:30 AM</option>
+            <option value="06:00:00 AM">6:00 AM</option>
+            <option value="06:30:00 AM">6:30 AM</option>
+            <option value="07:00:00 AM">7:00 AM</option>
+            <option value="07:30:00 AM">7:30 AM</option>
+            <option value="08:00:00 AM">8:00 AM</option>
+            <option value="08:30:00 AM">8:30 AM</option>
+            <option value="09:00:00 AM" selected="selected">9:00 AM</option>
+            <option value="09:30:00 AM">9:30 AM</option>
+            <option value="10:00:00 AM">10:00 AM</option>
+            <option value="10:30:00 AM">10:30 AM</option>
+            <option value="11:00:00 AM">11:00 AM</option>
+            <option value="11:30:00 AM">11:30 AM</option>
+            <option value="12:00:00 PM">12:00 PM</option>
+            <option value="12:30:00 PM">12:30 PM</option>
+            <option value="01:00:00 PM">1:00 PM</option>
+            <option value="01:30:00 PM">1:30 PM</option>
+            <option value="02:00:00 PM">2:00 PM</option>
+            <option value="02:30:00 PM">2:30 PM</option>
+            <option value="03:00:00 PM">3:00 PM</option>
+            <option value="03:30:00 PM">3:30 PM</option>
+            <option value="04:00:00 PM">4:00 PM</option>
+            <option value="04:30:00 PM">4:30 PM</option>
+            <option value="05:00:00 PM">5:00 PM</option>
+            <option value="05:30:00 PM">5:30 PM</option>
+            <option value="06:00:00 PM">6:00 PM</option>
+            <option value="06:30:00 PM">6:30 PM</option>
+            <option value="07:00:00 PM">7:00 PM</option>
+            <option value="07:30:00 PM">7:30 PM</option>
+            <option value="08:00:00 PM">8:00 PM</option>
+            <option value="08:30:00 PM">8:30 PM</option>
+            <option value="09:00:00 PM">9:00 PM</option>
+            <option value="09:30:00 PM">9:30 PM</option>
+            <option value="10:00:00 PM">10:00 PM</option>
+            <option value="10:30:00 PM">10:30 PM</option>
+            <option value="11:00:00 PM">11:00 PM</option>
+            <option value="11:30:00 PM">11:30 PM</option>
+        </select>
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.EndDateTime)
+    </div>
+    <div class="controls">
+        @Html.HiddenFor(m => m.EndDateTime)
+        <input class="input-medium datepicker" id="EndDate" name="EndDate" placeholder="Pick a Date" required="required" type="text" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
+        <select id="EndTime" name="EndTime" class="input-medium" required>
+            <option value="00:00:00 AM">12:00 AM</option>
+            <option value="00:30:00 AM">12:30 AM</option>
+            <option value="01:00:00 AM">1:00 AM</option>
+            <option value="01:30:00 AM">1:30 AM</option>
+            <option value="02:00:00 AM">2:00 AM</option>
+            <option value="02:30:00 AM">2:30 AM</option>
+            <option value="03:00:00 AM">3:00 AM</option>
+            <option value="03:30:00 AM">3:30 AM</option>
+            <option value="04:00:00 AM">4:00 AM</option>
+            <option value="04:30:00 AM">4:30 AM</option>
+            <option value="05:00:00 AM">5:00 AM</option>
+            <option value="05:30:00 AM">5:30 AM</option>
+            <option value="06:00:00 AM">6:00 AM</option>
+            <option value="06:30:00 AM">6:30 AM</option>
+            <option value="07:00:00 AM">7:00 AM</option>
+            <option value="07:30:00 AM">7:30 AM</option>
+            <option value="08:00:00 AM">8:00 AM</option>
+            <option value="08:30:00 AM">8:30 AM</option>
+            <option value="09:00:00 AM" selected="selected">9:00 AM</option>
+            <option value="09:30:00 AM">9:30 AM</option>
+            <option value="10:00:00 AM">10:00 AM</option>
+            <option value="10:30:00 AM">10:30 AM</option>
+            <option value="11:00:00 AM">11:00 AM</option>
+            <option value="11:30:00 AM">11:30 AM</option>
+            <option value="12:00:00 PM">12:00 PM</option>
+            <option value="12:30:00 PM">12:30 PM</option>
+            <option value="01:00:00 PM">1:00 PM</option>
+            <option value="01:30:00 PM">1:30 PM</option>
+            <option value="02:00:00 PM">2:00 PM</option>
+            <option value="02:30:00 PM">2:30 PM</option>
+            <option value="03:00:00 PM">3:00 PM</option>
+            <option value="03:30:00 PM">3:30 PM</option>
+            <option value="04:00:00 PM">4:00 PM</option>
+            <option value="04:30:00 PM">4:30 PM</option>
+            <option value="05:00:00 PM">5:00 PM</option>
+            <option value="05:30:00 PM">5:30 PM</option>
+            <option value="06:00:00 PM">6:00 PM</option>
+            <option value="06:30:00 PM">6:30 PM</option>
+            <option value="07:00:00 PM">7:00 PM</option>
+            <option value="07:30:00 PM">7:30 PM</option>
+            <option value="08:00:00 PM">8:00 PM</option>
+            <option value="08:30:00 PM">8:30 PM</option>
+            <option value="09:00:00 PM">9:00 PM</option>
+            <option value="09:30:00 PM">9:30 PM</option>
+            <option value="10:00:00 PM">10:00 PM</option>
+            <option value="10:30:00 PM">10:30 PM</option>
+            <option value="11:00:00 PM">11:00 PM</option>
+            <option value="11:30:00 PM">11:30 PM</option>
+        </select>
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.IsVirtualEvent)
+    </div>
+    <div class="controls">
+        @Html.CheckBoxFor(m => m.IsVirtualEvent, new { @class = "checkbox", onclick="IsVirtualEventClick();" })
+    </div>
+</div>
+<div id="locationDiv" class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Address)
+    </div>
+    <div class="controls controls-row">
+        @Html.TextBoxFor(m => m.Address, new { @class = "input-xlarge", required = "required", placeholder = "Address" })
+        @Html.TextBoxFor(m => m.City, new { @class = "input-small", required = "required", placeholder = "City" })
+        @Html.DropDownListFor(m => m.Country, new SelectList(@DevNext.Web.Helpers.CountryList.Countries), new { @class = "input-medium", required = "required" })
+
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Url)
+    </div>
+    <div class="controls">
+        @Html.Html5TextBoxFor(m => m.Url, InputTypes.InputType.Url, new { @class = "input-xxlarge" }, "http://www.example.com")
+    </div>
+</div>
+<div class="control-group">
+    <div class="control-label">
+        @Html.LabelFor(m => m.Description)
+    </div>
+    <div class="controls">
+        @Html.TextAreaFor(m => m.Description, 6, 1, new { @class = "input-xxlarge", required = "required" })
+    </div>
+</div>

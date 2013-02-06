@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Home - DevNext User Group";
+}
+<section id="highlights">
+    <div class="row">
+        <div class="span9">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <img src="~/Images/slide1.jpg" alt="slide1" />
+                    </li>
+                    <li>
+                        <img src="~/Images/slide2.jpg" alt="slide2" />
+                    </li>
+                    <li>
+                        <img src="~/Images/slide3.jpg" alt="slide3" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <aside>
+            <div class="pull-right span3">
+                @*<iframe name="fbFrame" src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fdevnext&amp;width=300&amp;height=260&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=true&amp;appId=141701935985451" frameborder="0" allowtransparency="true" style="border: none; height: 360px; overflow: hidden; width: 100%;"></iframe>*@
+                <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fdevnext&amp;width=292&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false&amp;appId=526067294092690" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 292px; height: 258px;" allowtransparency="true"></iframe>
+                <a href="https://twitter.com/devnext" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@devnext</a>
+                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+            </div>
+        </aside>
+    </div>
+</section>
+<section id="menu_tiles">
+    <div class="row">
+        <div class="span9">
+            <a href="@Url.Action("Index", "Event")">
+                <div id="events" class="btn btn-large tile span2">
+                    @*previously applied classes="tile well span2"*@
+                    <p>Events</p>
+                    <img src="~/Images/calendar_month.png" alt="event" />
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Archive")">
+                <div id="archvies" class="btn btn-large tile span2">
+                    <p>Archives</p>
+                    <img src="~/Images/archive.png" alt="archive" />
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "BlogFeed")">
+                <div id="blogfeeds" class="btn btn-large tile span2">
+                    <p>Blog Feed</p>
+                    <img src="~/Images/rss.png" alt="rss" />
+                </div>
+            </a>
+            <a href="#about_devnext">
+                <div id="about" class="btn btn-large tile span2">
+                    <p>About</p>
+                    <img src="~/Images/info.png" alt="info" />
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<hr />
+<section id="about_devnext">
+    <div class="page-header">
+        <h1>About DevNext</h1>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="well justify-para">
+                <img src="~/Images/devnext_landscape.png" alt="devnext_landscape" />
+
+                <p>
+                    <br />
+                    DevNext is a user group which has been created with the intention of providing a platform for the Next Generation Designers & Developers sharing and discussing knowledge regarding different tools and technologies. Our mission from inception has been to develop a peer group of developers, designers, architects, and managers who are interested in learning, sharing and growing their knowledge and capabilities. The group’s vision is to provide members with a forum to hear top industry experts speak, learn and teach others who are interested in the same technologies as you and are facing the same challenges.
+                </p>
+                <p>
+                    User Group is supported by many organizations around the world like Microsoft, Adobe, INETA, Telerik, Discount ASP.NET, Culminis, Wiley, Apress, .Net University, Re-Sharper, Peach Pit and many more.
+                </p>
+                <p>
+                    Are you a developer? designer? Student? Have a passion to learn something new? Interested in getting up-to-date, learning new technologies in your spare time. So here we are with a community focusing Next Generation Designers and Developers called <strong>DevNext</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script type="text/javascript" charset="utf-8">
+
+        $(window).load(function () {
+            $('.flexslider').flexslider();
+        });
+
+    </script>
+}

@@ -1,0 +1,41 @@
+@model DevNext.Web.Models.UserGroupEvent
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section id="create_event">
+    <div class="page-header">
+        <h2>Events</h2>
+    </div>
+    <div class="row">
+        <div class="span9 offset1">
+            @using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "form-horizontal well", onsubmit = "javascript:validateEventForm(this);" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>Create New Event</legend>
+
+                    @Html.Partial("_CreateOrEdit", Model)
+
+                    <div class="form-actions">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </fieldset>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(onEventFormReady());
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model DevNext.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+<section id="login">
+    <div class="page-header">
+        <h2>Login</h2>
+    </div>
+    <div class="row">
+        <div class="offset1 span10">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "well form-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>Log in using site account</legend>
+                        <input type="text" placeholder="UserName" id="UserName" name="UserName" required />
+                        <input type="password" placeholder="Password" id="Password" name="Password" required />
+                        <label class="checkbox">
+                            <input id="RememberMe" name="RememberMe" type="checkbox" />Remember Me
+                        </label>
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                        <br/><br/>
+                        <span>or @Html.ActionLink("Sign up", "Register") on this site.
+                        </span>
+                    </fieldset>
+                   
+                }
+            </section>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="offset1 span10">
+            <section id="socialLoginForm">
+                @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
