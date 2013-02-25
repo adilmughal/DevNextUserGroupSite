@@ -4,7 +4,7 @@
 * intended to be used only for design-time IntelliSense.  Please use the
 * standard jQuery library for all production use.
 *
-* Comment version: 1.8
+* Comment version: 1.11.0
 */
 
 /*
@@ -15,12 +15,9 @@
 * for informational purposes only and are not the license terms under
 * which Microsoft distributed this file.
 *
-* jQuery validation plugin 1.8.0
-*
-* http://bassistance.de/jquery-plugins/jquery-plugin-validation/
-* http://docs.jquery.com/Plugins/Validation
-*
-* Copyright (c) 2006 - 2011 Jörn Zaefferer
+* jQuery Validation Plugin - v1.11.0 - 2/4/2013
+* https://github.com/jzaefferer/jquery-validation
+* Copyright (c) 2013 Jörn Zaefferer; Licensed MIT
 *
 */
 
@@ -30,7 +27,7 @@ $.extend($.fn, {
 	// http://docs.jquery.com/Plugins/Validation/validate
 	validate: function( options ) {
 		/// <summary>
-		/// Validates the selected form. This method sets up eventInfo handlers for submit, focus,
+		/// Validates the selected form. This method sets up event handlers for submit, focus,
 		/// keyup, blur and click to trigger validation of the entire form or individual
 		/// elements. Each one can be disabled, see the onxxx options (onsubmit, onfocusout,
 		/// onkeyup, onclick). focusInvalid focuses elements when submitting a invalid form.
@@ -69,10 +66,10 @@ $.extend($.fn, {
 			}
 		
 			// validate the form on submit
-			this.submit( function( eventInfo ) {
+			this.submit( function( event ) {
 				if ( validator.settings.debug )
 					// prevent form submit to be able to see console output
-					eventInfo.preventDefault();
+					event.preventDefault();
 					
 				function handle() {
 					if ( validator.settings.submitHandler ) {
@@ -363,9 +360,9 @@ $.extend($.validator, {
 				rules[key] = $.validator.normalizeRule(value);
 			});
 			
-			function delegate(eventInfo) {
+			function delegate(event) {
 				var validator = $.data(this[0].form, "validator"),
-					eventType = "on" + eventInfo.type.replace(/^validate/, "");
+					eventType = "on" + event.type.replace(/^validate/, "");
 				validator.settings[eventType] && validator.settings[eventType].call(validator, this[0] );
 			}
 			$(this.currentForm)
@@ -380,7 +377,7 @@ $.extend($.validator, {
 		form: function() {
 			/// <summary>
 			/// Validates the form, returns true if it is valid, false otherwise.
-			/// This behaves as a normal submit eventInfo, but returns the result.
+			/// This behaves as a normal submit event, but returns the result.
 			/// </summary>
 			/// <returns type="Boolean" />
 
@@ -514,7 +511,7 @@ $.extend($.validator, {
 					$(this.findLastActive() || this.errorList.length && this.errorList[0].element || [])
 					.filter(":visible")
 					.focus()
-					// manually trigger focusin eventInfo; without it, focusin handler isn't called, findLastActive won't have anything to find
+					// manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
 					.trigger("focusin");
 				} catch(e) {
 					// ignore IE throwing errors when focusing hidden elements
@@ -1195,8 +1192,8 @@ $.extend($.validator, {
 		
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
-			// bind to the blur eventInfo of the target in order to revalidate whenever the target field is updated
-			// TODO find a way to bind the eventInfo just once, avoiding the unbind-rebind overhead
+			// bind to the blur event of the target in order to revalidate whenever the target field is updated
+			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
 			var target = $(param).unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {
 				$(element).valid();
 			});
@@ -1246,19 +1243,19 @@ $.format = $.validator.format;
 })(jQuery);
 
 // provides cross-browser focusin and focusout events
-// IE has native support, in other browsers, use eventInfo caputuring (neither bubbles)
+// IE has native support, in other browsers, use event caputuring (neither bubbles)
 
-// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier eventInfo delegation
-// handler is only called when $(eventInfo.target).is(delegate), in the scope of the jquery-object for eventInfo.target 
+// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier event delegation
+// handler is only called when $(event.target).is(delegate), in the scope of the jquery-object for event.target 
 ;(function($) {
 	// only implement if not provided by jQuery core (since 1.4)
-	// TODO verify if jQuery 1.4's implementation is compatible with older jQuery special-eventInfo APIs
-	if (!jQuery.eventInfo.special.focusin && !jQuery.eventInfo.special.focusout && document.addEventListener) {
+	// TODO verify if jQuery 1.4's implementation is compatible with older jQuery special-event APIs
+	if (!jQuery.event.special.focusin && !jQuery.event.special.focusout && document.addEventListener) {
 		$.each({
 			focus: 'focusin',
 			blur: 'focusout'	
 		}, function( original, fix ){
-			$.eventInfo.special[fix] = {
+			$.event.special[fix] = {
 				setup:function() {
 					this.addEventListener( original, handler, true );
 				},
@@ -1266,22 +1263,22 @@ $.format = $.validator.format;
 					this.removeEventListener( original, handler, true );
 				},
 				handler: function(e) {
-					arguments[0] = $.eventInfo.fix(e);
+					arguments[0] = $.event.fix(e);
 					arguments[0].type = fix;
-					return $.eventInfo.handle.apply(this, arguments);
+					return $.event.handle.apply(this, arguments);
 				}
 			};
 			function handler(e) {
-				e = $.eventInfo.fix(e);
+				e = $.event.fix(e);
 				e.type = fix;
-				return $.eventInfo.handle.call(this, e);
+				return $.event.handle.call(this, e);
 			}
 		});
 	};
 	$.extend($.fn, {
 		validateDelegate: function(delegate, type, handler) {
-			return this.bind(type, function(eventInfo) {
-				var target = $(eventInfo.target);
+			return this.bind(type, function(event) {
+				var target = $(event.target);
 				if (target.is(delegate)) {
 					return handler.apply(target, arguments);
 				}
